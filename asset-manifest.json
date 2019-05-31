@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/react-locations-plot/static/css/main.555c9e25.chunk.css",
+    "main.js": "/react-locations-plot/static/js/main.d5288a16.chunk.js",
+    "main.js.map": "/react-locations-plot/static/js/main.d5288a16.chunk.js.map",
+    "runtime~main.js": "/react-locations-plot/static/js/runtime~main.e21aa0dc.js",
+    "runtime~main.js.map": "/react-locations-plot/static/js/runtime~main.e21aa0dc.js.map",
+    "static/css/2.59ec12d7.chunk.css": "/react-locations-plot/static/css/2.59ec12d7.chunk.css",
+    "static/js/2.023e5c9f.chunk.js": "/react-locations-plot/static/js/2.023e5c9f.chunk.js",
+    "static/js/2.023e5c9f.chunk.js.map": "/react-locations-plot/static/js/2.023e5c9f.chunk.js.map",
+    "index.html": "/react-locations-plot/index.html",
+    "precache-manifest.4bb7ced372254a9405787ad06e1846ae.js": "/react-locations-plot/precache-manifest.4bb7ced372254a9405787ad06e1846ae.js",
+    "service-worker.js": "/react-locations-plot/service-worker.js",
+    "static/css/2.59ec12d7.chunk.css.map": "/react-locations-plot/static/css/2.59ec12d7.chunk.css.map",
+    "static/css/main.555c9e25.chunk.css.map": "/react-locations-plot/static/css/main.555c9e25.chunk.css.map"
+  }
+}
