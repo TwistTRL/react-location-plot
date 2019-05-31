@@ -1,0 +1,15 @@
+.LocationsPlotSelectionLabel-float {
+  position: relative;
+  width: 100px;
+  margin-left: -50px;
+  text-align: center;
+  color:white;
+  font: 14pt Sans;
+}
+
+.LocationsPlotSelectionLabel {
+  position:relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
