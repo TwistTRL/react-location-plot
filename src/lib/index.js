@@ -1,6 +1,6 @@
-import LocationsPlot from "./LocationsPlot";
-import LocationsPlotHoverSelector from "./LocationsPlotHoverSelector";
-import LocationsPlotSelectionLabel from "./LocationsPlotSelectionLabel";
+import LocationPlot from "./LocationPlot";
+import LocationPlotHoverSelector from "./LocationPlotHoverSelector";
+import LocationPlotSelectionLabel from "./LocationPlotSelectionLabel";
 
-export default LocationsPlot;
-export {LocationsPlotHoverSelector,LocationsPlotSelectionLabel};
+export default LocationPlot;
+export {LocationPlotHoverSelector,LocationPlotSelectionLabel};

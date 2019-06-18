@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {toDomXCoord_Linear} from "plot-utils";
 import "./LocationsPlotSelectionLabel.css"
 
-class LocationsPlotSelectionLabel extends PureComponent {
+class LocationPlotSelectionLabel extends PureComponent {
   render() {
     let { selection, /* {name,start,end} */
           minX,maxX,
@@ -25,7 +25,7 @@ class LocationsPlotSelectionLabel extends PureComponent {
   }
 }
 
-LocationsPlotSelectionLabel.propTypes = {
+LocationPlotSelectionLabel.propTypes = {
   selection: PropTypes.object,
   minX: PropTypes.number.isRequired,
   maxX: PropTypes.number.isRequired,
@@ -33,4 +33,4 @@ LocationsPlotSelectionLabel.propTypes = {
   height: PropTypes.number.isRequired,
 }
 
-export default LocationsPlotSelectionLabel;
+export default LocationPlotSelectionLabel;

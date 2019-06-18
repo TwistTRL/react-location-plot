@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import {PlotInteractionProvider, INTERACTION_MODEL_BARE} from "react-plot-interaction-box";
 import {HashRouter as Router, Link, Route} from "react-router-dom";
 
-import LocationsPlot, {LocationsPlotSelectionLabel,LocationsPlotHoverSelector}  from "./lib";
+import LocationPlot, {LocationPlotSelectionLabel,LocationPlotHoverSelector}  from "./lib";
 
 // CSS
 import "./index.css";
@@ -11,7 +11,7 @@ import "./index.css";
 // data
 import data from "./sample";
 
-class LocationsPlotBundle extends Component {
+class LocationPlotBundle extends Component {
   constructor(props){
     super(props);
     this.state={width:500,
@@ -70,7 +70,7 @@ class LocationsPlotBundle extends Component {
         </fieldset>
         <fieldset>
           <legend>Result</legend>
-          <LocationsPlot  width={width}
+          <LocationPlot  width={width}
                           height={height}
                           minX={minX}
                           maxX={maxX}
@@ -82,7 +82,7 @@ class LocationsPlotBundle extends Component {
   }
 }
 
-class LocationsPlotFullBundle extends Component {
+class LocationPlotFullBundle extends Component {
   constructor(props) {
     super(props);
     this.state={selection: null
@@ -101,14 +101,14 @@ class LocationsPlotFullBundle extends Component {
       <>
         <fieldset>
           <legend>Comment</legend>
-          LocationsPlot, LocationsPlotSelectionLabel, LocationsPlotHoverSelector and PlotInteractionProvider working in unison.
-          PlotInteractionProvider=>LocationsPlotHoverSelector=>"update state"=>LocationsPlotSelectionLabel
+          LocationPlot, LocationPlotSelectionLabel, LocationPlotHoverSelector and PlotInteractionProvider working in unison.
+          PlotInteractionProvider=>LocationPlotHoverSelector=>"update state"=>LocationPlotSelectionLabel
         </fieldset>
         <fieldset>
           <legend>Result</legend>
           <div style={{width:width,height:height}}>
             <div style={{position:"absolute",width:width,height:height}}>
-              <LocationsPlot  width={width}
+              <LocationPlot  width={width}
                               height={height}
                               minX={0}
                               maxX={2600}
@@ -116,7 +116,7 @@ class LocationsPlotFullBundle extends Component {
                               />
             </div>
             <div style={{position:"absolute", width:width,height:height}}>
-              <LocationsPlotSelectionLabel  width={width}
+              <LocationPlotSelectionLabel  width={width}
                                             height={height}
                                             minX={0}
                                             maxX={2600}
@@ -127,7 +127,7 @@ class LocationsPlotFullBundle extends Component {
               <PlotInteractionProvider  width={width} height={height}
                                         transitionGraph={INTERACTION_MODEL_BARE}
                                         render={(positions)=>
-                <LocationsPlotHoverSelector data={mixedData}
+                <LocationPlotHoverSelector data={mixedData}
                                             minX={minX}
                                             maxX={maxX}
                                             width={width}
@@ -149,11 +149,11 @@ class App extends Component {
     return(
       <Router>
         <nav className="app">
-          <Link to="/LocationsPlot">LocationsPlot</Link>
-          <Link to="/LocationsPlot_full">LocationsPlot with all its glory</Link>
+          <Link to="/LocationPlot">LocationPlot</Link>
+          <Link to="/LocationPlot_full">LocationPlot with all its glory</Link>
         </nav>
-        <Route path="/LocationsPlot" component={LocationsPlotBundle} />
-        <Route path="/LocationsPlot_full" component={LocationsPlotFullBundle} />
+        <Route path="/LocationPlot" component={LocationPlotBundle} />
+        <Route path="/LocationPlot_full" component={LocationPlotFullBundle} />
       </Router>
     );
   }

@@ -1,5 +1,5 @@
 {
-  "name": "react-locations-plot",
+  "name": "react-location-plot",
   "version": "0.1.0",
   "description": "...",
   "main": "dist/index.js",
@@ -8,7 +8,7 @@
     "extends": "react-app"
   },
   "dependencies": {
-    "plot-utils": "github:zhoulytwinyu/plot-utils"
+    "plot-utils": "github:zhoulytwinyu/plot-utils#v0.1.0"
   },
   "peerDependencies": {
     "prop-types": "^15.7.2",
@@ -23,7 +23,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-plot-interaction-box": "github:twisttrl/react-plot-interaction-box",
+    "react-plot-interaction-box": "github:twisttrl/react-plot-interaction-box#v0.1.0",
     "react-router-dom": "^5.0.0",
     "react-scripts": "^3.0.1"
   },
@@ -54,14 +54,14 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
-  "homepage": "https://twisttrl.github.io/react-locations-plot",
+  "homepage": "https://twisttrl.github.io/react-location-plot",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/twisttrl/react-locations-plot.git"
+    "url": "git+https://github.com/twisttrl/react-location-plot.git"
   },
   "author": "Lingyu Zhou",
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/twisttrl/react-locations-plot/issues"
+    "url": "https://github.com/twisttrl/react-location-plot/issues"
   }
 }

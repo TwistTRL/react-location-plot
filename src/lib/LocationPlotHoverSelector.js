@@ -4,7 +4,7 @@ import {bisect_left,
         bisect_right} from "bisect";
 import {fromDomXCoord_Linear} from "plot-utils";
 
-class LocationsPlotHoverSelector extends Component {
+class LocationPlotHoverSelector extends Component {
   render(){
     return null;
   }
@@ -57,7 +57,7 @@ class LocationsPlotHoverSelector extends Component {
   }
 }
 
-LocationsPlotHoverSelector.propTypes = {
+LocationPlotHoverSelector.propTypes = {
   data: PropTypes.array.isRequired,
   minX: PropTypes.number.isRequired,
   maxX: PropTypes.number.isRequired,
@@ -66,4 +66,4 @@ LocationsPlotHoverSelector.propTypes = {
   selectHandler: PropTypes.func.isRequired
 }
 
-export default LocationsPlotHoverSelector;
+export default LocationPlotHoverSelector;

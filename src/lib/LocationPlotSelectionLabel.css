@@ -1,4 +1,4 @@
-.LocationsPlotSelectionLabel-float {
+.LocationPlotSelectionLabel-float {
   position: relative;
   width: 100px;
   margin-left: -50px;
@@ -7,7 +7,7 @@
   font: 14pt Sans;
 }
 
-.LocationsPlotSelectionLabel {
+.LocationPlotSelectionLabel {
   position:relative;
   display: flex;
   flex-direction: row;

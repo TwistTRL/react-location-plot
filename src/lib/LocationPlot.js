@@ -9,7 +9,7 @@ const COLOR_LUT={"other":"#5084de",
                  "home":"#7eca8a"
                  };
 
-class LocationsPlot extends PureComponent {
+class LocationPlot extends PureComponent {
   constructor(props){
     super(props);
     this.ref = React.createRef();
@@ -52,7 +52,7 @@ class LocationsPlot extends PureComponent {
   }
 }
 
-LocationsPlot.propTypes = {
+LocationPlot.propTypes = {
   height: PropTypes.number.isRequired,
   width: PropTypes.number.isRequired,
   data: PropTypes.array.isRequired,
@@ -60,4 +60,4 @@ LocationsPlot.propTypes = {
   maxX: PropTypes.number.isRequired,
 }
 
-export default LocationsPlot;
+export default LocationPlot;
