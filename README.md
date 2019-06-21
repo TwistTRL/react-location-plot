@@ -4,6 +4,11 @@
 
 https://twisttrl.github.io/react-location-plot
 
+## Import
+```
+import LocationPlot, {LocationPlotSelectionLabel,LocationPlotHoverSelector} from "react-location-plot";
+```
+
 ## Example
 ```
 /*
