@@ -5,15 +5,17 @@ import "./LocationPlotSelectionLabel.css"
 
 class LocationPlotSelectionLabel extends PureComponent {
   render() {
-    let { selection, /* {name,start,end} */
+    let { data, /* { id:{name,start,end,id} }*/
+          selection, /* id */
           minX,maxX,
           width,height} = this.props;
-    if (!selection) {
+    if ( !(selection in data) ) {
       return null;
     }
-    let domStart = toDomXCoord_Linear(width,minX,maxX,selection.start);
-    let domEnd = toDomXCoord_Linear(width,minX,maxX,selection.end);
-    let label = selection.name;
+    
+    let domStart = toDomXCoord_Linear(width,minX,maxX,data[selection].start);
+    let domEnd = toDomXCoord_Linear(width,minX,maxX,data[selection].end);
+    let label = data[selection].name;
     let labelDomX = (Math.max(0,domStart)+Math.min(width,domEnd))/2;
     return (
       <div className="LocationPlotSelectionLabel" style={{width:width,height:height}}>
@@ -26,7 +28,8 @@ class LocationPlotSelectionLabel extends PureComponent {
 }
 
 LocationPlotSelectionLabel.propTypes = {
-  selection: PropTypes.object,
+  data: PropTypes.object.isRequired,
+  selection: PropTypes.number,
   minX: PropTypes.number.isRequired,
   maxX: PropTypes.number.isRequired,
   width: PropTypes.number.isRequired,

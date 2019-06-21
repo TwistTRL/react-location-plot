@@ -38,7 +38,8 @@ class LocationPlot extends PureComponent {
     let canvas = this.ref.current;
     let ctx = canvas.getContext("2d");
     ctx.clearRect(0,0,width,1);
-    for (let rec of data) {
+    for (let rec of Object.values(data)) {
+      // O(n) linear filtering
       if (rec.end<minX || maxX<rec.start){
         continue;
       }
@@ -54,7 +55,7 @@ class LocationPlot extends PureComponent {
 LocationPlot.propTypes = {
   height: PropTypes.number.isRequired,
   width: PropTypes.number.isRequired,
-  data: PropTypes.array.isRequired,
+  data: PropTypes.object.isRequired,
   minX: PropTypes.number.isRequired,
   maxX: PropTypes.number.isRequired,
 }

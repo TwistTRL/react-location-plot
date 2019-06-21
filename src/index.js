@@ -116,10 +116,11 @@ class LocationPlotFullBundle extends Component {
                               />
             </div>
             <div style={{position:"absolute", width:width,height:height}}>
-              <LocationPlotSelectionLabel  width={width}
+              <LocationPlotSelectionLabel   width={width}
                                             height={height}
                                             minX={0}
                                             maxX={2600}
+                                            data={mixedData}
                                             selection={selection}
                                             />
             </div>

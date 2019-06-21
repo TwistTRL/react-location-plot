@@ -9,8 +9,6 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
-var _bisect = require("bisect");
-
 var _plotUtils = require("plot-utils");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -96,37 +94,20 @@ function (_PureComponent) {
       var canvas = this.ref.current;
       var ctx = canvas.getContext("2d");
       ctx.clearRect(0, 0, width, 1);
-      var _iteratorNormalCompletion = true;
-      var _didIteratorError = false;
-      var _iteratorError = undefined;
 
-      try {
-        for (var _iterator = data[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-          var rec = _step.value;
+      for (var _i = 0, _Object$values = Object.values(data); _i < _Object$values.length; _i++) {
+        var rec = _Object$values[_i];
 
-          if (rec.end < minX || maxX < rec.start) {
-            continue;
-          }
-
-          var startDomX = Math.max(0, (0, _plotUtils.toDomXCoord_Linear)(width, minX, maxX, rec.start));
-          var endDomX = Math.min(width, (0, _plotUtils.toDomXCoord_Linear)(width, minX, maxX, rec.end));
-          var color = COLOR_LUT[rec.name];
-          ctx.fillStyle = color;
-          ctx.fillRect(startDomX, 0, endDomX - startDomX, 1);
+        // O(n) linear filtering
+        if (rec.end < minX || maxX < rec.start) {
+          continue;
         }
-      } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion && _iterator.return != null) {
-            _iterator.return();
-          }
-        } finally {
-          if (_didIteratorError) {
-            throw _iteratorError;
-          }
-        }
+
+        var startDomX = Math.max(0, (0, _plotUtils.toDomXCoord_Linear)(width, minX, maxX, rec.start));
+        var endDomX = Math.min(width, (0, _plotUtils.toDomXCoord_Linear)(width, minX, maxX, rec.end));
+        var color = COLOR_LUT[rec.name];
+        ctx.fillStyle = color;
+        ctx.fillRect(startDomX, 0, endDomX - startDomX, 1);
       }
     }
   }]);
@@ -137,7 +118,7 @@ function (_PureComponent) {
 LocationPlot.propTypes = {
   height: _propTypes.default.number.isRequired,
   width: _propTypes.default.number.isRequired,
-  data: _propTypes.default.array.isRequired,
+  data: _propTypes.default.object.isRequired,
   minX: _propTypes.default.number.isRequired,
   maxX: _propTypes.default.number.isRequired
 };

@@ -50,19 +50,20 @@ function (_PureComponent) {
     key: "render",
     value: function render() {
       var _this$props = this.props,
+          data = _this$props.data,
           selection = _this$props.selection,
           minX = _this$props.minX,
           maxX = _this$props.maxX,
           width = _this$props.width,
           height = _this$props.height;
 
-      if (!selection) {
+      if (!(selection in data)) {
         return null;
       }
 
-      var domStart = (0, _plotUtils.toDomXCoord_Linear)(width, minX, maxX, selection.start);
-      var domEnd = (0, _plotUtils.toDomXCoord_Linear)(width, minX, maxX, selection.end);
-      var label = selection.name;
+      var domStart = (0, _plotUtils.toDomXCoord_Linear)(width, minX, maxX, data[selection].start);
+      var domEnd = (0, _plotUtils.toDomXCoord_Linear)(width, minX, maxX, data[selection].end);
+      var label = data[selection].name;
       var labelDomX = (Math.max(0, domStart) + Math.min(width, domEnd)) / 2;
       return _react.default.createElement("div", {
         className: "LocationPlotSelectionLabel",
@@ -83,7 +84,8 @@ function (_PureComponent) {
 }(_react.PureComponent);
 
 LocationPlotSelectionLabel.propTypes = {
-  selection: _propTypes.default.object,
+  data: _propTypes.default.object.isRequired,
+  selection: _propTypes.default.number,
   minX: _propTypes.default.number.isRequired,
   maxX: _propTypes.default.number.isRequired,
   width: _propTypes.default.number.isRequired,

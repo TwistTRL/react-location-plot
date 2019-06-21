@@ -9,8 +9,6 @@ var _react = require("react");
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
-var _bisect = require("bisect");
-
 var _plotUtils = require("plot-utils");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -88,31 +86,15 @@ function (_Component) {
         return;
       }
 
-      this.select_memo = this.select_memo || {};
-      var memo = this.select_memo;
-
-      if (memo.data !== data) {
-        memo.data = data;
-        memo.starts = data.map(function (_ref) {
-          var start = _ref.start;
-          return start;
-        });
-        memo.ends = data.map(function (_ref2) {
-          var end = _ref2.end;
-          return end;
-        });
-      }
-
       var hoverDomX = hoveringPosition.domX;
       var hoverX = (0, _plotUtils.fromDomXCoord_Linear)(width, minX, maxX, hoverDomX);
-      var startIndex = (0, _bisect.bisect_left)(memo.starts, hoverX);
-      var endIndex = (0, _bisect.bisect_right)(memo.ends, hoverX);
 
-      if (startIndex > endIndex) {
-        selectHandler(null);
-      } else {
-        var selection = data[endIndex];
-        selectHandler(selection);
+      for (var _i = 0, _Object$values = Object.values(data); _i < _Object$values.length; _i++) {
+        var rec = _Object$values[_i];
+
+        if (rec.start < hoverX && hoverX < rec.end) {
+          selectHandler(rec.id);
+        }
       }
     }
   }]);
@@ -121,7 +103,7 @@ function (_Component) {
 }(_react.Component);
 
 LocationPlotHoverSelector.propTypes = {
-  data: _propTypes.default.array.isRequired,
+  data: _propTypes.default.object.isRequired,
   minX: _propTypes.default.number.isRequired,
   maxX: _propTypes.default.number.isRequired,
   width: _propTypes.default.number.isRequired,

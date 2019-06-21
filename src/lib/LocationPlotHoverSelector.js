@@ -1,7 +1,5 @@
 import { Component } from 'react';
 import PropTypes from "prop-types";
-import {bisect_left,
-        bisect_right} from "bisect";
 import {fromDomXCoord_Linear} from "plot-utils";
 
 class LocationPlotHoverSelector extends Component {
@@ -25,7 +23,7 @@ class LocationPlotHoverSelector extends Component {
   }
 
   select() {
-    let { data, /* [{start,end},...] sorted asc*/
+    let { data, /* { id:{start,end,id},...} */
           minX,maxX,width,
           hoveringPosition,
           selectHandler} = this.props;
@@ -36,29 +34,18 @@ class LocationPlotHoverSelector extends Component {
       selectHandler(null);
       return;
     }
-    this.select_memo = this.select_memo || {};
-    let memo = this.select_memo;
-    if (memo.data !== data) {
-      memo.data = data;
-      memo.starts = data.map(({start})=>start);
-      memo.ends = data.map(({end})=>end);
-    }
     let hoverDomX = hoveringPosition.domX;
     let hoverX = fromDomXCoord_Linear(width,minX,maxX,hoverDomX);
-    let startIndex = bisect_left(memo.starts,hoverX);
-    let endIndex = bisect_right(memo.ends,hoverX);
-    if (startIndex > endIndex) {
-      selectHandler(null);
-    }
-    else {
-      let selection = data[endIndex];
-      selectHandler(selection);
+    for (let rec of Object.values(data)){
+      if (rec.start<hoverX && hoverX<rec.end) {
+        selectHandler(rec.id);
+      }
     }
   }
 }
 
 LocationPlotHoverSelector.propTypes = {
-  data: PropTypes.array.isRequired,
+  data: PropTypes.object.isRequired,
   minX: PropTypes.number.isRequired,
   maxX: PropTypes.number.isRequired,
   width: PropTypes.number.isRequired,
