@@ -9,9 +9,9 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
-var _bisect = require("bisect");
-
 var _plotUtils = require("plot-utils");
+
+require("./LocationPlotSelectionLabel.css");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -35,111 +35,59 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-var COLOR_LUT = {
-  "other": "#5084de",
-  "8s": "#de5f50",
-  "8e": "#deb150",
-  "home": "#7eca8a"
-};
-
-var LocationsPlot =
+var LocationPlotSelectionLabel =
 /*#__PURE__*/
 function (_PureComponent) {
-  _inherits(LocationsPlot, _PureComponent);
+  _inherits(LocationPlotSelectionLabel, _PureComponent);
 
-  function LocationsPlot(props) {
-    var _this;
+  function LocationPlotSelectionLabel() {
+    _classCallCheck(this, LocationPlotSelectionLabel);
 
-    _classCallCheck(this, LocationsPlot);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(LocationsPlot).call(this, props));
-    _this.ref = _react.default.createRef();
-    return _this;
+    return _possibleConstructorReturn(this, _getPrototypeOf(LocationPlotSelectionLabel).apply(this, arguments));
   }
 
-  _createClass(LocationsPlot, [{
+  _createClass(LocationPlotSelectionLabel, [{
     key: "render",
     value: function render() {
       var _this$props = this.props,
-          height = _this$props.height,
-          width = _this$props.width;
-      return _react.default.createElement("canvas", {
-        ref: this.ref,
-        width: width,
-        height: 1,
-        style: {
-          height: height,
-          width: width,
-          backgroundColor: "lightgrey",
-          display: "block"
-        }
-      });
-    }
-  }, {
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this.draw();
-    }
-  }, {
-    key: "componentDidUpdate",
-    value: function componentDidUpdate() {
-      this.draw();
-    }
-  }, {
-    key: "draw",
-    value: function draw() {
-      var _this$props2 = this.props,
-          data = _this$props2.data,
-          minX = _this$props2.minX,
-          maxX = _this$props2.maxX,
-          width = _this$props2.width;
-      var canvas = this.ref.current;
-      var ctx = canvas.getContext("2d");
-      ctx.clearRect(0, 0, width, 1);
-      var _iteratorNormalCompletion = true;
-      var _didIteratorError = false;
-      var _iteratorError = undefined;
+          selection = _this$props.selection,
+          minX = _this$props.minX,
+          maxX = _this$props.maxX,
+          width = _this$props.width,
+          height = _this$props.height;
 
-      try {
-        for (var _iterator = data[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-          var rec = _step.value;
-
-          if (rec.end < minX || maxX < rec.start) {
-            continue;
-          }
-
-          var startDomX = Math.max(0, (0, _plotUtils.toDomXCoord_Linear)(width, minX, maxX, rec.start));
-          var endDomX = Math.min(width, (0, _plotUtils.toDomXCoord_Linear)(width, minX, maxX, rec.end));
-          var color = COLOR_LUT[rec.name];
-          ctx.fillStyle = color;
-          ctx.fillRect(startDomX, 0, endDomX - startDomX, 1);
-        }
-      } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion && _iterator.return != null) {
-            _iterator.return();
-          }
-        } finally {
-          if (_didIteratorError) {
-            throw _iteratorError;
-          }
-        }
+      if (!selection) {
+        return null;
       }
+
+      var domStart = (0, _plotUtils.toDomXCoord_Linear)(width, minX, maxX, selection.start);
+      var domEnd = (0, _plotUtils.toDomXCoord_Linear)(width, minX, maxX, selection.end);
+      var label = selection.name;
+      var labelDomX = (Math.max(0, domStart) + Math.min(width, domEnd)) / 2;
+      return _react.default.createElement("div", {
+        className: "LocationPlotSelectionLabel",
+        style: {
+          width: width,
+          height: height
+        }
+      }, _react.default.createElement("div", {
+        className: "LocationPlotSelectionLabel-float",
+        style: {
+          left: labelDomX
+        }
+      }, label));
     }
   }]);
 
-  return LocationsPlot;
+  return LocationPlotSelectionLabel;
 }(_react.PureComponent);
 
-LocationsPlot.propTypes = {
-  height: _propTypes.default.number.isRequired,
-  width: _propTypes.default.number.isRequired,
-  data: _propTypes.default.array.isRequired,
+LocationPlotSelectionLabel.propTypes = {
+  selection: _propTypes.default.object,
   minX: _propTypes.default.number.isRequired,
-  maxX: _propTypes.default.number.isRequired
+  maxX: _propTypes.default.number.isRequired,
+  width: _propTypes.default.number.isRequired,
+  height: _propTypes.default.number.isRequired
 };
-var _default = LocationsPlot;
+var _default = LocationPlotSelectionLabel;
 exports.default = _default;

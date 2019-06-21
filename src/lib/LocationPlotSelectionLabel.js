@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from "prop-types";
 import {toDomXCoord_Linear} from "plot-utils";
-import "./LocationsPlotSelectionLabel.css"
+import "./LocationPlotSelectionLabel.css"
 
 class LocationPlotSelectionLabel extends PureComponent {
   render() {
@@ -16,8 +16,8 @@ class LocationPlotSelectionLabel extends PureComponent {
     let label = selection.name;
     let labelDomX = (Math.max(0,domStart)+Math.min(width,domEnd))/2;
     return (
-      <div className="LocationsPlotSelectionLabel" style={{width:width,height:height}}>
-        <div className="LocationsPlotSelectionLabel-float" style={{left:labelDomX}}>
+      <div className="LocationPlotSelectionLabel" style={{width:width,height:height}}>
+        <div className="LocationPlotSelectionLabel-float" style={{left:labelDomX}}>
           {label}
         </div>
       </div>

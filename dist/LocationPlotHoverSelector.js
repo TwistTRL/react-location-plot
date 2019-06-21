@@ -33,18 +33,18 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-var LocationsPlotHoverSelector =
+var LocationPlotHoverSelector =
 /*#__PURE__*/
 function (_Component) {
-  _inherits(LocationsPlotHoverSelector, _Component);
+  _inherits(LocationPlotHoverSelector, _Component);
 
-  function LocationsPlotHoverSelector() {
-    _classCallCheck(this, LocationsPlotHoverSelector);
+  function LocationPlotHoverSelector() {
+    _classCallCheck(this, LocationPlotHoverSelector);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(LocationsPlotHoverSelector).apply(this, arguments));
+    return _possibleConstructorReturn(this, _getPrototypeOf(LocationPlotHoverSelector).apply(this, arguments));
   }
 
-  _createClass(LocationsPlotHoverSelector, [{
+  _createClass(LocationPlotHoverSelector, [{
     key: "render",
     value: function render() {
       return null;
@@ -117,10 +117,10 @@ function (_Component) {
     }
   }]);
 
-  return LocationsPlotHoverSelector;
+  return LocationPlotHoverSelector;
 }(_react.Component);
 
-LocationsPlotHoverSelector.propTypes = {
+LocationPlotHoverSelector.propTypes = {
   data: _propTypes.default.array.isRequired,
   minX: _propTypes.default.number.isRequired,
   maxX: _propTypes.default.number.isRequired,
@@ -128,5 +128,5 @@ LocationsPlotHoverSelector.propTypes = {
   hoveringPosition: _propTypes.default.object,
   selectHandler: _propTypes.default.func.isRequired
 };
-var _default = LocationsPlotHoverSelector;
+var _default = LocationPlotHoverSelector;
 exports.default = _default;

@@ -3,27 +3,27 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-Object.defineProperty(exports, "LocationsPlotHoverSelector", {
+Object.defineProperty(exports, "LocationPlotHoverSelector", {
   enumerable: true,
   get: function get() {
-    return _LocationsPlotHoverSelector.default;
+    return _LocationPlotHoverSelector.default;
   }
 });
-Object.defineProperty(exports, "LocationsPlotSelectionLabel", {
+Object.defineProperty(exports, "LocationPlotSelectionLabel", {
   enumerable: true,
   get: function get() {
-    return _LocationsPlotSelectionLabel.default;
+    return _LocationPlotSelectionLabel.default;
   }
 });
 exports.default = void 0;
 
-var _LocationsPlot = _interopRequireDefault(require("./LocationsPlot"));
+var _LocationPlot = _interopRequireDefault(require("./LocationPlot"));
 
-var _LocationsPlotHoverSelector = _interopRequireDefault(require("./LocationsPlotHoverSelector"));
+var _LocationPlotHoverSelector = _interopRequireDefault(require("./LocationPlotHoverSelector"));
 
-var _LocationsPlotSelectionLabel = _interopRequireDefault(require("./LocationsPlotSelectionLabel"));
+var _LocationPlotSelectionLabel = _interopRequireDefault(require("./LocationPlotSelectionLabel"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _default = _LocationsPlot.default;
+var _default = _LocationPlot.default;
 exports.default = _default;
