@@ -33,6 +33,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
+var START_KEY = "START";
+var END_KEY = "END";
+var NAME_KEY = "NAME";
+var ID_KEY = "ID";
 var COLOR_LUT = {
   "other": "#5084de",
   "8s": "#de5f50",
@@ -94,20 +98,38 @@ function (_PureComponent) {
       var canvas = this.ref.current;
       var ctx = canvas.getContext("2d");
       ctx.clearRect(0, 0, width, 1);
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
 
-      for (var _i = 0, _Object$values = Object.values(data); _i < _Object$values.length; _i++) {
-        var rec = _Object$values[_i];
+      try {
+        for (var _iterator = data[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          var rec = _step.value;
 
-        // O(n) linear filtering
-        if (rec.end < minX || maxX < rec.start) {
-          continue;
+          // O(n) linear filtering
+          if (rec.end < minX || maxX < rec.start) {
+            continue;
+          }
+
+          var startDomX = Math.round((0, _plotUtils.toDomXCoord_Linear)(width, minX, maxX, rec[START_KEY]));
+          var endDomX = Math.round((0, _plotUtils.toDomXCoord_Linear)(width, minX, maxX, rec[END_KEY]));
+          var color = COLOR_LUT[rec[NAME_KEY]];
+          ctx.fillStyle = color;
+          ctx.fillRect(startDomX, 0, endDomX - startDomX, 1);
         }
-
-        var startDomX = Math.max(0, (0, _plotUtils.toDomXCoord_Linear)(width, minX, maxX, rec.start));
-        var endDomX = Math.min(width, (0, _plotUtils.toDomXCoord_Linear)(width, minX, maxX, rec.end));
-        var color = COLOR_LUT[rec.name];
-        ctx.fillStyle = color;
-        ctx.fillRect(startDomX, 0, endDomX - startDomX, 1);
+      } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion && _iterator.return != null) {
+            _iterator.return();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
       }
     }
   }]);
@@ -118,7 +140,7 @@ function (_PureComponent) {
 LocationPlot.propTypes = {
   height: _propTypes.default.number.isRequired,
   width: _propTypes.default.number.isRequired,
-  data: _propTypes.default.object.isRequired,
+  data: _propTypes.default.array.isRequired,
   minX: _propTypes.default.number.isRequired,
   maxX: _propTypes.default.number.isRequired
 };

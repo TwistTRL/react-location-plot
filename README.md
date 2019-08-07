@@ -43,6 +43,5 @@ import LocationPlot, {LocationPlotSelectionLabel,LocationPlotHoverSelector} from
                               hoveringPosition={positions.hoveringPosition}
                               selectHandler={(obj)=>this.setState({selection:obj})}
                               />
-                          }
-                          />
+                          }/>
 ```

@@ -3,27 +3,26 @@ import ReactDOM from 'react-dom';
 import {PlotInteractionProvider, INTERACTION_MODEL_BARE} from "react-plot-interaction-box";
 import {HashRouter as Router, Link, Route} from "react-router-dom";
 
-import LocationPlot, {LocationPlotSelectionLabel,LocationPlotHoverSelector}  from "./lib";
+import LocationPlot,{LocationPlotSelectionLabel,LocationPlotHoverSelector}  from "./lib";
 
 // CSS
 import "./index.css";
 
 // data
-import data from "./sample";
+import {LOCATION,DATA_MIN_X,DATA_MAX_X} from "./sampleData";
 
 class LocationPlotBundle extends Component {
   constructor(props){
     super(props);
     this.state={width:500,
                 height:30,
-                minX:0,
-                maxX:2000,
-                data_:"Other"
+                minX:DATA_MIN_X,
+                maxX:DATA_MAX_X
                 };
   }
   
   render() {
-    let {width,height,minX,maxX,data_} = this.state;
+    let {width,height,minX,maxX} = this.state;
     return (
       <>
         <fieldset>
@@ -42,29 +41,20 @@ class LocationPlotBundle extends Component {
           </div>
           <div>
             minX
-            <input type="range" min={0} max={maxX} value={minX}
+            <input type="range" min={DATA_MIN_X} max={maxX} value={minX}
                                 onChange={(ev)=>this.setState({minX:Number.parseInt(ev.target.value)})}/>
             {minX}
           </div>
           <div>
             maxX
-            <input type="range" min={minX} max={2000} value={maxX}
+            <input type="range" min={minX} max={DATA_MAX_X} value={maxX}
                                 onChange={(ev)=>this.setState({maxX:Number.parseInt(ev.target.value)})}/>
             {maxX}
           </div>
           <div>
             data
-            <select value={data_}
-                    onChange={(ev)=>this.setState({data_:ev.target.value})}>
-              <option value="Other">Other</option>
-              <option value="8S">8S</option>
-              <option value="8E">8E</option>
-              <option value="Home">Home</option>
-              <option value="8S_ongoing">8S, ongoing</option>
-              <option value="mix">mix</option>
-            </select>
-            <pre>
-              {JSON.stringify(data[data_],null,' ')}
+            <pre style={{maxHeight:600,overflow:"scroll"}}>
+              {JSON.stringify(LOCATION,null,' ')}
             </pre>
           </div>
         </fieldset>
@@ -74,7 +64,7 @@ class LocationPlotBundle extends Component {
                           height={height}
                           minX={minX}
                           maxX={maxX}
-                          data={data[data_]}
+                          data={LOCATION}
                           />
         </fieldset>
       </>
@@ -92,11 +82,9 @@ class LocationPlotFullBundle extends Component {
   render() {
     let width = 500;
     let height = 30;
-    let minX = 0;
-    let maxX = 2500;
-    let mixedData = data["mix"];
+    let minX = DATA_MIN_X;
+    let maxX = DATA_MAX_X;
     let {selection} = this.state;
-    
     return (
       <>
         <fieldset>
@@ -108,32 +96,32 @@ class LocationPlotFullBundle extends Component {
           <legend>Result</legend>
           <div style={{width:width,height:height}}>
             <div style={{position:"absolute",width:width,height:height}}>
-              <LocationPlot  width={width}
-                              height={height}
-                              minX={0}
-                              maxX={2600}
-                              data={mixedData}
-                              />
+              <LocationPlot width={width}
+                            height={height}
+                            minX={minX}
+                            maxX={maxX}
+                            data={LOCATION}
+                            />
             </div>
             <div style={{position:"absolute", width:width,height:height}}>
-              <LocationPlotSelectionLabel   width={width}
-                                            height={height}
-                                            minX={0}
-                                            maxX={2600}
-                                            data={mixedData}
-                                            selection={selection}
-                                            />
+              <LocationPlotSelectionLabel width={width}
+                                          height={height}
+                                          minX={minX}
+                                          maxX={maxX}
+                                          data={LOCATION}
+                                          selection={selection}
+                                          />
             </div>
             <div style={{position:"absolute", width:width,height:height}}>
               <PlotInteractionProvider  width={width} height={height}
                                         transitionGraph={INTERACTION_MODEL_BARE}
-                                        render={(positions)=>
-                <LocationPlotHoverSelector data={mixedData}
+                                        render={(interactions)=>
+                <LocationPlotHoverSelector  data={LOCATION}
                                             minX={minX}
                                             maxX={maxX}
                                             width={width}
-                                            hoveringPosition={positions.hoveringPosition}
-                                            selectHandler={(obj)=>this.setState({selection:obj})}
+                                            hoveringPosition={interactions.hoveringPosition}
+                                            selectHandler={ (id)=>{this.setState({selection:id})} }
                                             />
                                         }
                                         />

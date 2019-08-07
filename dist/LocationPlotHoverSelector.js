@@ -31,6 +31,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
+var START_KEY = "START";
+var END_KEY = "END";
+var ID_KEY = "ID";
+
 var LocationPlotHoverSelector =
 /*#__PURE__*/
 function (_Component) {
@@ -77,23 +81,38 @@ function (_Component) {
           hoveringPosition = _this$props.hoveringPosition,
           selectHandler = _this$props.selectHandler;
 
-      if (hoveringPosition === undefined) {
-        return;
-      }
-
       if (hoveringPosition === null) {
         selectHandler(null);
         return;
       }
 
-      var hoverDomX = hoveringPosition.domX;
-      var hoverX = (0, _plotUtils.fromDomXCoord_Linear)(width, minX, maxX, hoverDomX);
+      var hoveringDomX = hoveringPosition["domX"];
+      var hoveringDataX = (0, _plotUtils.fromDomXCoord_Linear)(width, minX, maxX, hoveringDomX);
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
 
-      for (var _i = 0, _Object$values = Object.values(data); _i < _Object$values.length; _i++) {
-        var rec = _Object$values[_i];
+      try {
+        for (var _iterator = data[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          var rec = _step.value;
 
-        if (rec.start < hoverX && hoverX < rec.end) {
-          selectHandler(rec.id);
+          if (rec[START_KEY] < hoveringDataX && hoveringDataX < rec[END_KEY]) {
+            selectHandler(rec[ID_KEY]);
+            break;
+          }
+        }
+      } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion && _iterator.return != null) {
+            _iterator.return();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
         }
       }
     }
@@ -103,7 +122,7 @@ function (_Component) {
 }(_react.Component);
 
 LocationPlotHoverSelector.propTypes = {
-  data: _propTypes.default.object.isRequired,
+  data: _propTypes.default.array.isRequired,
   minX: _propTypes.default.number.isRequired,
   maxX: _propTypes.default.number.isRequired,
   width: _propTypes.default.number.isRequired,

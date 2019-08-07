@@ -2,6 +2,10 @@ import { Component } from 'react';
 import PropTypes from "prop-types";
 import {fromDomXCoord_Linear} from "plot-utils";
 
+const START_KEY = "START";
+const END_KEY = "END";
+const ID_KEY = "ID";
+
 class LocationPlotHoverSelector extends Component {
   render(){
     return null;
@@ -23,29 +27,27 @@ class LocationPlotHoverSelector extends Component {
   }
 
   select() {
-    let { data, /* { id:{start,end,id},...} */
+    let { data, /* [ {ID,START,END,...},... ] */
           minX,maxX,width,
           hoveringPosition,
           selectHandler} = this.props;
-    if (hoveringPosition===undefined) {
-      return;
-    }
     if (hoveringPosition===null) {
       selectHandler(null);
       return;
     }
-    let hoverDomX = hoveringPosition.domX;
-    let hoverX = fromDomXCoord_Linear(width,minX,maxX,hoverDomX);
-    for (let rec of Object.values(data)){
-      if (rec.start<hoverX && hoverX<rec.end) {
-        selectHandler(rec.id);
+    let hoveringDomX = hoveringPosition["domX"];
+    let hoveringDataX = fromDomXCoord_Linear(width,minX,maxX,hoveringDomX);
+    for (let rec of data){
+      if (rec[START_KEY]<hoveringDataX && hoveringDataX<rec[END_KEY]) {
+        selectHandler(rec[ID_KEY]);
+        break;
       }
     }
   }
 }
 
 LocationPlotHoverSelector.propTypes = {
-  data: PropTypes.object.isRequired,
+  data: PropTypes.array.isRequired,
   minX: PropTypes.number.isRequired,
   maxX: PropTypes.number.isRequired,
   width: PropTypes.number.isRequired,

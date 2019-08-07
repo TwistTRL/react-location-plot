@@ -8,6 +8,7 @@
     "extends": "react-app"
   },
   "dependencies": {
+    "memoize": "github:zhoulytwinyu/memoize#v0.1.0",
     "plot-utils": "github:zhoulytwinyu/plot-utils#v0.1.0"
   },
   "peerDependencies": {
@@ -17,6 +18,7 @@
   "devDependencies": {
     "@babel/cli": "^7.4.4",
     "@babel/core": "^7.4.5",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/preset-env": "^7.4.5",
     "@babel/preset-react": "^7.0.0",
     "gh-pages": "^2.0.1",
@@ -43,6 +45,9 @@
     "presets": [
       "@babel/preset-react",
       "@babel/preset-env"
+    ],
+    "plugins": [
+      "@babel/plugin-proposal-class-properties"
     ]
   },
   "scripts": {
